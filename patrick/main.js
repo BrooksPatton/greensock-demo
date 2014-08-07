@@ -84,8 +84,12 @@ $(document).on('ready', function() {
 				y: function(endValue) {
 					return (liveSnap) ? Math.round(endValue / rowHeight) * rowHeight : endValue;
 				}
+			},
+			onDrag: function() {
+				console.log(this.pointerX);
 			}
 		});
+		
 	}
 
 	var applySnap = function() {
@@ -108,8 +112,6 @@ $(document).on('ready', function() {
 
 
 // ________________________________________________________________________
-
-$('.box').onDrag(console.log('hey'));
 
 
 
