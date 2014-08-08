@@ -1,0 +1,31 @@
+/*.title{
+	margin: 100px 400px;
+}*/
+
+
+#photo {
+	height: 400px;
+	width: 200px;
+	display: block;
+
+}
+
+#beer {
+	height: 200px;
+	width: 200px;
+	display: block;
+}
+
+.main{
+	margin: 100px 400px;
+}
+
+
+.container2{
+	border-color: red;
+	background-color: green;
+	color: gold;
+	margin: 4%;
+	max-width: 50%;
+	/*position: relative;*/
+}
