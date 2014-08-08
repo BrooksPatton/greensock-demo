@@ -36,7 +36,7 @@ $(document).on('ready', function() {
 
 // _____________________________________________________________________________
 	var $liveSnap = $("#liveSnap");
-	var $container = $("#container");
+	var $container = $("#pc-container");
 	var gridRows = 7;
 	var gridColumns = 8;
 	var columnWidth = $container.width()/gridColumns;
@@ -45,19 +45,19 @@ $(document).on('ready', function() {
 	var rowHeight = $container.height()/gridRows;
 	// console.log('height: ' + rowHeight);
 
-	$('.box').css({'height': rowHeight + 'px',
+	$('.pc-box, .pc-early-box').css({'height': rowHeight + 'px',
 					'width': columnWidth + 'px',
 					'line-height': rowHeight + 'px'});
-	$('#box2').css({'left': ((parseInt(gridColumns*0.65)) * columnWidth)});
+	$('#pc-box2').css({'left': ((parseInt(gridColumns*0.65)) * columnWidth)});
 
 	for (var i = 0; i < gridRows; i++) {
 		var y = i * rowHeight;
-		$container.prepend($("<div class='grid-row'/>").css({'height':rowHeight, 'top':y}));
+		$container.prepend($("<div class='pc-grid-row'/>").css({'height':rowHeight, 'top':y}));
 	}
 
 	for (var i = 0; i < gridColumns; i++) {
 		var x = i * columnWidth;
-		$container.prepend($("<div class='grid-column'/>").css({'width':columnWidth, 'left':x}));
+		$container.prepend($("<div class='pc-grid-column'/>").css({'width':columnWidth, 'left':x}));
 	}
 
 
@@ -66,27 +66,58 @@ $(document).on('ready', function() {
 
 	// set the container's size to match the grid, and ensure that the box widths/heights reflect the variables above
 	TweenLite.set($container, {height: gridRows * rowHeight + 1, width: gridColumns * columnWidth + 1});
-	TweenLite.set(".box", {width:columnWidth, height:rowHeight, lineHeight:rowHeight + "px"});
+	TweenLite.set(".pc-box", {width:columnWidth, height:rowHeight, lineHeight:rowHeight + "px"});
 
 	//the update() function is what creates the Draggable according to the options selected (snapping).
 	function update() {
 		var liveSnap = $liveSnap.prop("checked");
-		Draggable.create(".box", {
+		Draggable.create(".pc-box", {
 			bounds:$container,
 			edgeResistance:0.65,
 			type:"x,y",
-			throwProps:true,
 			liveSnap:liveSnap,
 			snap:{
 				x: function(endValue) {
-					return (liveSnap) ? Math.round(endValue / columnWidth) * columnWidth : endValue;
+					return Math.round(endValue / columnWidth) * columnWidth;
 				},
 				y: function(endValue) {
-					return (liveSnap) ? Math.round(endValue / rowHeight) * rowHeight : endValue;
+					return Math.round(endValue / rowHeight) * rowHeight;
 				}
 			},
 			onDrag: function() {
-				console.log(this.pointerX);
+				var thisTop = Math.floor($(this.target).offset().top)
+				var thisLeft = Math.floor($(this.target).offset().left)
+
+				// console.log('top: ' + thisTop + '   left: ' + thisLeft);
+				
+
+				var gridColumn = $('.pc-grid-column');
+				var gridRow = $('.pc-grid-row');
+
+				var currentColumn = "";
+				var currentRow = "";
+
+				for (var i = 0; i < gridColumn.length; i++) {
+					if(thisLeft > ((gridColumn.eq(i).offset().left) - 5) && thisLeft < ((gridColumn.eq(i).offset().left) + 5)) {
+						// console.log('this column index: ' + i );
+						currentColumn = i;
+					}
+					gridColumn.css('border', '');
+				}
+				gridColumn.eq(currentColumn).css('border-left', '1px dotted gray');
+
+				
+				for (var i = 0; i < gridRow.length; i++) {
+					if(thisTop > ((gridRow.eq(i).offset().top) - 5) && thisTop < ((gridRow.eq(i).offset().top) + 5)) {
+						// console.log('this row index: ' + i);
+						currentRow = i;
+					}
+					gridRow.css('border', '');
+				}
+				gridRow.eq(currentRow).css('border-top', '1px dotted gray');
+			},
+			onDragEnd: function() {
+				$('.pc-grid-row, .pc-grid-column').css('border', '');
 			}
 		});
 		
@@ -94,7 +125,7 @@ $(document).on('ready', function() {
 
 	var applySnap = function() {
 		if ($liveSnap.prop("checked")) {
-			$(".box").each(function(index, element) {
+			$(".pc-box").each(function(index, element) {
 				TweenLite.to(element, 0.5, {
 					x:Math.round(element._gsTransform.x / columnWidth) * columnWidth,
 					y:Math.round(element._gsTransform.y / rowHeight) * rowHeight,
@@ -105,14 +136,20 @@ $(document).on('ready', function() {
 		}
 		update();
 	};
-
 	update();
+
+	$(document).on('click', '.pc-early-box', function() {
+		var boxReplace = $('.pc-box-menu').html();
+		var cloneThis = $(this).clone();
+		
+		$(this).removeClass('pc-early-box').addClass('pc-box pc-drag-box');
+		update();
+		$('.pc-box-menu').append(boxReplace);
+	});
 
 
 
 
 // ________________________________________________________________________
-
-
 
 });
