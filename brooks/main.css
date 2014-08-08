@@ -1,6 +1,21 @@
+#brooks {
+	background: #000;
+	height: 500px;
+	color: #fff;
+}
+
+#brooks button {
+	color: blue;;
+}
+
 .box {
-	width: 10px;
-	height: 10px;
-	background: red;
-	position: relative;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	border-radius: 50%;
+}
+
+.num-boxes {
+	font-weight: bold;
+	font-size: 2em;
 }
