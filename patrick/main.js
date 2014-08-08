@@ -138,15 +138,26 @@ $(document).on('ready', function() {
 	};
 	update();
 
-	$(document).on('click', '.pc-early-box', function() {
-		var boxReplace = $('.pc-box-menu').html();
-		var cloneThis = $(this).clone();
+
 		
-		$(this).removeClass('pc-early-box').addClass('pc-box pc-drag-box');
+
+	$(document).on('mousedown', '.pc-early-box', function() {
+		var thisPlaceLeft = event.pageX;
+		var thisPlaceTop = event.pageY;
+
+		console.log(thisPlaceTop + " " + thisPlaceLeft);
+
+		$('.pc-early-box').removeClass('pc-early-box').addClass('pc-box pc-drag-box');
+
+
+
 		update();
-		$('.pc-box-menu').append(boxReplace);
 	});
 
+	$(document).on('click', '.pc-early-box', function() {
+		var boxReplace = $('.pc-box-menu').html();
+		$('.pc-box-menu').append(boxReplace);
+	});
 
 
 
