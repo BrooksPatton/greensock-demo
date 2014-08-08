@@ -1,5 +1,5 @@
 var BROOKS_LOCATION = '#brooks';
-var MIN_TOP = 30;
+var MIN_TOP = 20;
 var MAX_BOTTOM = 480;
 var BOX_CREATION_RATE = 3000;
 var ANIMATE_TIME = 2;
