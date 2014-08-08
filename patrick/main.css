@@ -1,7 +1,7 @@
 
 body {
 	background-color:black;
-	font-family: Signika Negative, Asap, sans-serif;
+	font-family: sans-serif;
 }
 
 .icon-holder {
@@ -11,8 +11,9 @@ body {
 
 
 .title-text {
+	color: #555;
 	font-weight: lighter;
-	margin: auto;
+	margin: 20px auto 0 auto;
 	padding: auto;
 	width: 600px;
 }
@@ -21,12 +22,16 @@ body {
 .little-bit {
 	font-size: 2px;
 	color: chartreuse;
+	opacity: 0;
+	margin: 0;
 }
-
-
 
 #container {
 	position:relative;
+	margin-left: 20px;
+	width: 550px;
+	height: 400px;
+	background-color: #233;
 }
 
 .box {
@@ -35,23 +40,27 @@ body {
 	font-size: 13px;
 	position: absolute;
 	top:0;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
 	border-radius: 10px;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 }
+
+.grid-row {
+	position: absolute;
+	border-top: 1px solid #454545;
+	width: 100%;
+}
+.grid-column {
+	position: absolute;
+	border-left: 1px solid #454545;
+	height: 100%;
+}
+
 
 #box1 {
 	background-color: chartreuse;
 }
 
 #box2 {
-	left:300px;
 	background-color:red;
 }
 
