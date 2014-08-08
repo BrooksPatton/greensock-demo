@@ -1,0 +1,28 @@
+.gage-div{
+	position: relative;
+	background-color: #191919;
+	margin: 0 auto;
+	width: 900px;
+	height: 300px;
+	font-family: 'Helvetica';
+}
+
+.gage-header{
+	white-space:pre-line;
+	position: relative;
+	top: 30%;
+	color: #FAFAFA;
+	font-size: 120px;
+	opacity: 1;
+	text-align: center;
+	font-weight: bold;
+}
+
+.gage-header2{
+	position: absolute;
+	top: 2px;
+	left: 177px;
+	color: #000000;
+	font-size: 120px;
+	opacity: 1;
+}
